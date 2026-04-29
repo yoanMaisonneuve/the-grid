@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The Grid — A living intelligence network for visionaries navigating civilizational change.">
+  <meta property="og:title" content="The Grid — Civilizational Intelligence Network">
+  <meta property="og:description" content="14 sectors. AI agents. Weekly publication. Built on the Global Plan.">
+  <title>The Grid — Civilizational Intelligence Network</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300&family=IBM+Plex+Sans:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* ── TOKENS ─────────────────────────────────────────────────────────── */
+    :root {
+      --marine:      #003A5D;
+      --vivid:       #009ADE;
+      --bg:          #000810;
+      --bg2:         #00101f;
+      --text:        #e8f4fa;
+      --text-dim:    #5a8ba8;
+      --text-mid:    #9bbfd4;
+      --card:        rgba(0, 16, 32, 0.94);
+      --border:      rgba(0, 154, 222, 0.22);
+      --disruption:  #009ADE;
+      --emergence:   #2d6a88;
+      --integration: #00d4aa;
+      --content:     min(1200px, 94vw);
+    }
+
+    /* ── RESET ──────────────────────────────────────────────────────────── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'IBM Plex Sans', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ── PROGRESS BAR ────────────────────────────────────────────────────── */
+    #progress-rail {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: 2px; background: var(--vivid);
+      transform-origin: left; transform: scaleX(0);
+      z-index: 100; transition: transform 0.1s linear;
+    }
+
+    /* ── NAV ─────────────────────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px;
+      height: 60px;
+      background: rgba(0, 8, 16, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 90;
+    }
+
+    .nav-brand {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--text);
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--vivid);
+      animation: blink 2.4s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; font-weight: 400;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--text-dim); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--vivid); }
+
+    .nav-cta {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 8px 18px;
+      border: 1px solid var(--vivid);
+      color: var(--vivid); background: none;
+      cursor: pointer; transition: background 0.2s;
+      text-decoration: none;
+    }
+    .nav-cta:hover { background: rgba(0,154,222,0.12); }
+
+    /* ── HERO ────────────────────────────────────────────────────────────── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    #hero-canvas {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+    }
+
+    #label-layer {
+      position: absolute; inset: 0;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative; z-index: 5;
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--vivid);
+      margin-bottom: 20px;
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+    }
+    .hero-eyebrow::before, .hero-eyebrow::after {
+      content: ''; width: 40px; height: 1px;
+      background: var(--vivid); opacity: 0.5;
+    }
+
+    .hero-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(52px, 8vw, 96px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 0.95;
+      margin-bottom: 28px;
+      background: linear-gradient(135deg, #fff 30%, var(--vivid) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 16px; font-weight: 300;
+      color: var(--text-mid);
+      max-width: 480px; margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex; align-items: center;
+      justify-content: center; gap: 16px;
+      pointer-events: all;
+    }
+
+    .btn-primary {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 14px 28px;
+      background: var(--vivid); color: #000;
+      border: none; cursor: pointer;
+      font-weight: 500;
+      transition: opacity 0.2s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+
+    .btn-ghost {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 14px 28px;
+      border: 1px solid var(--border); color: var(--text-dim);
+      background: none; cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-ghost:hover { border-color: var(--vivid); color: var(--vivid); }
+
+    .hero-meta {
+      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+      display: flex; align-items: center; gap: 32px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px; letter-spacing: 0.18em;
+      color: var(--text-dim); text-transform: uppercase;
+      pointer-events: none; z-index: 5;
+    }
+    .hero-meta span { opacity: 0.6; }
+    .hero-meta strong { color: var(--vivid); font-weight: 500; opacity: 0.9; }
+
+    /* Corner brackets */
+    .brackets {
+      position: absolute; inset: 20px;
+      pointer-events: none; z-index: 4;
+    }
+    .brackets::before, .brackets::after,
+    .brackets-inner::before, .brackets-inner::after {
+      content: ''; position: absolute;
+      width: 28px; height: 28px;
+    }
+    .brackets::before  { top: 0; left: 0;    border-top: 1px solid; border-left: 1px solid; }
+    .brackets::after   { top: 0; right: 0;   border-top: 1px solid; border-right: 1px solid; }
+    .brackets-inner::before { bottom: 0; left: 0;  border-bottom: 1px solid; border-left: 1px solid; }
+    .brackets-inner::after  { bottom: 0; right: 0; border-bottom: 1px solid; border-right: 1px solid; }
+    .brackets, .brackets::before, .brackets::after,
+    .brackets-inner::before, .brackets-inner::after {
+      border-color: rgba(0,154,222,0.35);
+    }
+
+    /* Scan lines */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background: repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.022) 2px,rgba(0,0,0,0.022) 4px);
+      pointer-events: none; z-index: 200;
+    }
+
+    /* ── SECTION COMMON ──────────────────────────────────────────────────── */
+    .section {
+      width: var(--content); margin: 0 auto;
+      padding: 100px 0;
+    }
+
+    .section-divider {
+      width: 100%; display: flex; align-items: center; gap: 20px;
+      padding: 0 40px; margin-bottom: 0;
+    }
+    .section-divider::before {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+    .divider-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--vivid); white-space: nowrap;
+      padding: 6px 16px;
+      border: 1px solid var(--border);
+    }
+    .section-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+
+    .section-eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--vivid); margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700; line-height: 1.15;
+      margin-bottom: 24px;
+    }
+
+    .section-body {
+      font-size: 16px; color: var(--text-mid);
+      max-width: 640px; line-height: 1.75;
+    }
+
+    /* ── WHAT IS THE GRID ───────────────────────────────────────────────── */
+    #what {
+      padding: 100px 40px;
+    }
+
+    .what-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: start;
+    }
+
+    .what-left {}
+    .what-right {}
+
+    .thesis {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px; font-weight: 500;
+      line-height: 1.5;
+      color: var(--text);
+      border-left: 3px solid var(--vivid);
+      padding-left: 20px;
+      margin: 32px 0;
+    }
+
+    .three-things {
+      display: flex; flex-direction: column; gap: 0;
+    }
+
+    .thing-item {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .thing-item:last-child { border-bottom: none; }
+
+    .thing-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px; color: var(--vivid);
+      letter-spacing: 0.2em; text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .thing-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px; font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .thing-desc {
+      font-size: 13px; color: var(--text-dim); line-height: 1.6;
+    }
+
+    /* ── SECTORS GRID ───────────────────────────────────────────────────── */
+    #sectors {
+      padding: 80px 40px;
+    }
+
+    .sectors-header {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 48px;
+    }
+
+    .sectors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .sector-card {
+      background: var(--bg);
+      padding: 24px 22px;
+      cursor: pointer;
+      transition: background 0.2s;
+      position: relative;
+    }
+    .sector-card:hover {
+      background: rgba(0,154,222,0.05);
+    }
+    .sector-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: var(--vivid); opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .sector-card:hover::before { opacity: 1; }
+
+    .sc-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px; color: var(--text-dim);
+      letter-spacing: 0.15em; margin-bottom: 10px;
+    }
+
+    .sc-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px; font-weight: 600;
+      margin-bottom: 10px; line-height: 1.3;
+    }
+
+    .sc-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 3px 8px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase;
+      border-radius: 1px;
+    }
+    .sc-badge.disruption  { background: rgba(0,154,222,0.1); border: 1px solid rgba(0,154,222,0.3); color: var(--vivid); }
+    .sc-badge.emergence   { background: rgba(45,106,136,0.1); border: 1px solid rgba(45,106,136,0.3); color: #7ab5cc; }
+    .sc-badge.integration { background: rgba(0,212,170,0.1); border: 1px solid rgba(0,212,170,0.3); color: var(--integration); }
+
+    .sc-pip {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: currentColor;
+    }
+
+    .sc-bn {
+      margin-top: 12px;
+      font-size: 11px; color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    /* ── HOW IT WORKS ───────────────────────────────────────────────────── */
+    #how {
+      padding: 100px 40px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 60px;
+    }
+
+    .step {
+      background: var(--bg2);
+      padding: 32px 24px;
+    }
+
+    .step-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px; color: var(--vivid);
+      letter-spacing: 0.2em; margin-bottom: 16px;
+    }
+
+    .step-icon {
+      font-size: 22px; margin-bottom: 16px;
+      font-family: 'IBM Plex Mono', monospace;
+      color: var(--vivid); opacity: 0.7;
+    }
+
+    .step-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px; font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .step-desc {
+      font-size: 13px; color: var(--text-dim); line-height: 1.65;
+    }
+
+    /* ── AGENTS ──────────────────────────────────────────────────────────── */
+    #agents {
+      padding: 100px 40px;
+    }
+
+    .agents-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 60px;
+    }
+
+    .agent-card {
+      background: var(--bg);
+      padding: 36px 28px;
+    }
+
+    .agent-id {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px; color: var(--vivid);
+      letter-spacing: 0.2em; text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .agent-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px; font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .agent-role {
+      font-size: 13px; color: var(--vivid);
+      margin-bottom: 16px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; letter-spacing: 0.08em;
+    }
+
+    .agent-desc {
+      font-size: 13px; color: var(--text-dim); line-height: 1.65;
+    }
+
+    .agent-trigger {
+      margin-top: 20px;
+      padding: 10px 12px;
+      background: rgba(0,154,222,0.05);
+      border: 1px solid var(--border);
+      border-left: 2px solid var(--vivid);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    /* ── JOIN ────────────────────────────────────────────────────────────── */
+    #join {
+      padding: 120px 40px;
+      text-align: center;
+      position: relative;
+    }
+
+    .join-bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(0,154,222,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .join-inner { position: relative; z-index: 2; }
+
+    .join-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 700; line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    .join-sub {
+      font-size: 16px; color: var(--text-mid);
+      max-width: 520px; margin: 0 auto 48px;
+      line-height: 1.75;
+    }
+
+    .join-form {
+      display: flex; gap: 0;
+      max-width: 440px; margin: 0 auto 24px;
+    }
+
+    .join-input {
+      flex: 1;
+      padding: 14px 18px;
+      background: rgba(0,154,222,0.06);
+      border: 1px solid var(--border);
+      border-right: none;
+      color: var(--text);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      outline: none;
+    }
+    .join-input::placeholder { color: var(--text-dim); }
+    .join-input:focus { border-color: var(--vivid); }
+
+    .join-submit {
+      padding: 14px 24px;
+      background: var(--vivid); border: none;
+      color: #000; cursor: pointer;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      transition: opacity 0.2s; white-space: nowrap;
+    }
+    .join-submit:hover { opacity: 0.85; }
+
+    .join-note {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px; color: var(--text-dim);
+      letter-spacing: 0.1em; text-transform: uppercase;
+    }
+
+    /* ── FOOTER ──────────────────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+
+    .footer-brand {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+    }
+
+    .footer-meta {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px; color: var(--text-dim);
+      letter-spacing: 0.12em; text-transform: uppercase;
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex; gap: 24px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .footer-links a {
+      color: var(--text-dim); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--vivid); }
+
+    /* ── SECTOR PANEL (full page) ───────────────────────────────────────── */
+    #sector-panel {
+      position: fixed; inset: 0;
+      background: rgba(0,8,16,0.96);
+      z-index: 80;
+      display: none;
+      overflow-y: auto;
+    }
+    #sector-panel.open { display: block; }
+
+    .sp-inner {
+      max-width: 800px; margin: 0 auto;
+      padding: 80px 40px;
+    }
+
+    .sp-close {
+      position: fixed; top: 24px; right: 32px;
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-dim); font-size: 18px;
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: color 0.2s, border-color 0.2s;
+      z-index: 81;
+    }
+    .sp-close:hover { color: var(--vivid); border-color: var(--vivid); }
+
+    .sp-eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px; color: var(--vivid);
+      letter-spacing: 0.25em; text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .sp-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 40px; font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .sp-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      border-radius: 1px; margin-bottom: 48px;
+    }
+    .sp-badge.disruption  { background: rgba(0,154,222,0.12); border: 1px solid rgba(0,154,222,0.35); color: var(--vivid); }
+    .sp-badge.emergence   { background: rgba(45,106,136,0.12); border: 1px solid rgba(45,106,136,0.35); color: #7ab5cc; }
+    .sp-badge.integration { background: rgba(0,212,170,0.12); border: 1px solid rgba(0,212,170,0.35); color: var(--integration); }
+
+    .sp-badge-dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; animation: blink 2.4s ease-in-out infinite; }
+
+    .sp-divider { height: 1px; background: var(--border); margin: 36px 0; }
+
+    .sp-sec {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px; color: var(--vivid);
+      letter-spacing: 0.22em; text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .bn-grid { display: flex; flex-direction: column; gap: 14px; margin-bottom: 8px; }
+    .bn-row { display: flex; gap: 12px; align-items: flex-start; }
+    .bn-lv {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 3px 7px; border-radius: 1px; flex-shrink: 0; margin-top: 2px;
+    }
+    .bn-lv.critical { background: rgba(220,60,60,0.1); border: 1px solid rgba(220,60,60,0.3); color: #e07070; }
+    .bn-lv.high     { background: rgba(220,140,0,0.1); border: 1px solid rgba(220,140,0,0.3); color: #e0a040; }
+    .bn-lv.medium   { background: rgba(100,100,100,0.1); border: 1px solid rgba(100,100,100,0.3); color: #888; }
+    .bn-text { font-size: 14px; color: var(--text-dim); line-height: 1.6; }
+
+    .tasks-row { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    .tasks-col-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px; color: var(--text-dim);
+      letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 14px;
+    }
+    .task-line {
+      font-size: 13px; color: var(--text-dim); line-height: 1.8;
+      padding-left: 14px; position: relative;
+    }
+    .task-line::before { content: '▸'; position: absolute; left: 0; color: var(--vivid); opacity: 0.5; font-size: 9px; top: 3px; }
+
+    .metric-box {
+      background: rgba(0,154,222,0.04);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--vivid);
+      padding: 20px 24px;
+    }
+    .metric-box-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px; color: var(--text-dim);
+      letter-spacing: 0.15em; text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .metric-row-nums { display: flex; gap: 40px; }
+    .metric-col-n { text-align: center; }
+    .metric-big {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 28px; font-weight: 700; color: var(--vivid);
+    }
+    .metric-yr {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px; color: var(--text-dim); letter-spacing: 0.1em;
+    }
+
+    .sp-contribute {
+      display: block; width: 100%; margin-top: 40px;
+      padding: 16px;
+      background: rgba(0,154,222,0.08);
+      border: 1px solid var(--vivid);
+      color: var(--vivid);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      cursor: pointer; transition: background 0.2s;
+      text-align: center;
+    }
+    .sp-contribute:hover { background: rgba(0,154,222,0.18); }
+
+    /* ── HUD OVERLAY (3D view) ───────────────────────────────────────────── */
+    .node-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px; color: var(--text-dim);
+      text-transform: uppercase; letter-spacing: 0.08em;
+      white-space: nowrap; pointer-events: none;
+      transition: color 0.2s;
+    }
+    .node-label.hl { color: #fff; }
+
+    #tooltip {
+      position: fixed;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--vivid);
+      padding: 8px 14px;
+      pointer-events: none; z-index: 95;
+      opacity: 0; transition: opacity 0.15s;
+    }
+    #tooltip.show { opacity: 1; }
+    .tt-n { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--text); letter-spacing: 0.04em; }
+    .tt-p { font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: var(--vivid); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 3px; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .what-grid, .steps, .agents-grid { grid-template-columns: 1fr; }
+      .tasks-row { grid-template-columns: 1fr; }
+      .sectors-grid { grid-template-columns: 1fr 1fr; }
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      #hero, .section, #what, #sectors, #how, #agents, #join { padding-left: 20px; padding-right: 20px; }
+    }
+    @media (max-width: 600px) {
+      .sectors-grid { grid-template-columns: 1fr; }
+      .join-form { flex-direction: column; }
+      .join-input { border-right: 1px solid var(--border); border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="progress-rail"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand"><div class="nav-dot"></div>THE GRID</a>
+  <ul class="nav-links">
+    <li><a href="#what">About</a></li>
+    <li><a href="#sectors">Sectors</a></li>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#agents">Agents</a></li>
+  </ul>
+  <a href="#join" class="nav-cta">Join the Grid</a>
+</nav>
+
+<!-- HERO with embedded 3D -->
+<section id="hero">
+  <div class="brackets"><div class="brackets-inner"></div></div>
+  <canvas id="hero-canvas"></canvas>
+  <div id="label-layer"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Civilizational Intelligence Network</div>
+    <h1 class="hero-title">The Grid</h1>
+    <p class="hero-sub">14 sectors. AI agents. Weekly publication.<br>A living map for visionaries navigating the transition.</p>
+    <div class="hero-actions">
+      <a href="#sectors" class="btn-primary">Navigate the sectors</a>
+      <a href="#join" class="btn-ghost">Join the Grid</a>
+    </div>
+  </div>
+
+  <div class="hero-meta">
+    <span>SECTORS <strong>14</strong></span>
+    <span>PHASE <strong>Disruption</strong></span>
+    <span>FORSIGHTS <strong>02 PUBLISHED</strong></span>
+    <span>SCROLL TO EXPLORE</span>
+  </div>
+</section>
+
+<!-- TOOLTIP -->
+<div id="tooltip"><div class="tt-n" id="tt-n"></div><div class="tt-p" id="tt-p"></div></div>
+
+<!-- WHAT IS THE GRID -->
+<div class="section-divider"><div class="divider-label">§ I — Context</div></div>
+<section id="what">
+  <div style="width:var(--content);margin:0 auto">
+    <div class="what-grid">
+      <div class="what-left">
+        <div class="section-eyebrow">What is The Grid</div>
+        <h2 class="section-title">The map is not enough.<br>You need a compass.</h2>
+        <p class="section-body">The Global Plan maps 14 simultaneous civilizational transitions — energy, AI, health, cities, governance. Each field is in a different phase. Each has different bottlenecks. Each requires a different human-AI task split.</p>
+        <div class="thesis">The Grid is where visionaries navigate that map together — contribute observations, generate insights, and publish what matters.</div>
+        <p class="section-body">Not Reddit. Not Discord. A spatial intelligence network anchored to a shared reference document and connected to a weekly publication with real-world reach.</p>
+      </div>
+      <div class="what-right">
+        <div class="three-things">
+          <div class="thing-item">
+            <div class="thing-num">// 01</div>
+            <div class="thing-name">Navigate by sector, not by time</div>
+            <div class="thing-desc">The 14 fields of the Global Plan are sectors. You navigate them in 3D. No chronological feed. No likes. Direction, not engagement.</div>
+          </div>
+          <div class="thing-item">
+            <div class="thing-num">// 02</div>
+            <div class="thing-name">Contribute observations. Agents do the rest.</div>
+            <div class="thing-desc">You share a raw observation — voice or text. The Forsight Agent structures it into a directional insight. You review. It gets published.</div>
+          </div>
+          <div class="thing-item">
+            <div class="thing-num">// 03</div>
+            <div class="thing-name">Weekly publication with actual impact</div>
+            <div class="thing-desc">Every Monday, the Curator Agent selects the top 3 Forsights of the week. They go to 5,000+ subscribers — your name on the work, Institut St-Laurent behind it.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTORS -->
+<div class="section-divider"><div class="divider-label">§ II — The 14 Sectors</div></div>
+<section id="sectors">
+  <div style="width:var(--content);margin:0 auto">
+    <div class="sectors-header">
+      <div>
+        <div class="section-eyebrow">Active sectors — April 2026</div>
+        <h2 class="section-title">Where each field stands today</h2>
+      </div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:0.15em;text-transform:uppercase;text-align:right">
+        Click any sector<br>to explore
+      </div>
+    </div>
+    <div class="sectors-grid" id="sectors-grid"></div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<div class="section-divider"><div class="divider-label">§ III — Process</div></div>
+<section id="how">
+  <div style="width:var(--content);margin:0 auto">
+    <div class="section-eyebrow">How it works</div>
+    <h2 class="section-title">From observation to publication<br>in one cycle</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">// 01</div>
+        <div class="step-icon">◎</div>
+        <div class="step-title">Observe</div>
+        <div class="step-desc">You notice something in one of the 14 fields. A friction, an anomaly, a weak signal. You submit it — voice note or text, raw and unpolished.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">// 02</div>
+        <div class="step-icon">⟴</div>
+        <div class="step-title">Structure</div>
+        <div class="step-desc">The Forsight Agent transforms your observation into a directional insight: field → phase → bottleneck → rupture → implication → transmissible formula.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">// 03</div>
+        <div class="step-icon">◈</div>
+        <div class="step-title">Curate</div>
+        <div class="step-desc">Every Friday, the Curator Agent reads all Forsights of the week. It selects the top 3 by clarity, transmissibility, and cross-sector reach.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">// 04</div>
+        <div class="step-icon">→</div>
+        <div class="step-title">Publish</div>
+        <div class="step-desc">Monday morning, the newsletter goes out. Your Forsight. Your name. Institut St-Laurent byline. Real-world distribution. Track record building.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENTS -->
+<div class="section-divider"><div class="divider-label">§ IV — AI Agents</div></div>
+<section id="agents">
+  <div style="width:var(--content);margin:0 auto">
+    <div class="section-eyebrow">Resident AI agents</div>
+    <h2 class="section-title">Not moderators. Members.</h2>
+    <div class="agents-grid">
+      <div class="agent-card">
+        <div class="agent-id">// AGENT · 01</div>
+        <div class="agent-name">Forsight Agent</div>
+        <div class="agent-role">Raw observation → structured insight</div>
+        <div class="agent-desc">Takes any voice note, rough text, or raw observation. Identifies the field, the phase, the bottleneck. Generates a 200–400 word directional post with a transmissible formula.</div>
+        <div class="agent-trigger">Triggered · On member submission</div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-id">// AGENT · 02</div>
+        <div class="agent-name">Sector Agent</div>
+        <div class="agent-role">Weekly synthesis per sector</div>
+        <div class="agent-desc">Every Monday, reads all activity in its assigned field. Synthesizes the week's themes, identifies what changed, and poses 1–2 open questions for the community.</div>
+        <div class="agent-trigger">Triggered · Monday 9:00 AM</div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-id">// AGENT · 03</div>
+        <div class="agent-name">Curator Agent</div>
+        <div class="agent-role">Newsletter selection + editorial</div>
+        <div class="agent-desc">Every Friday, reads all Forsights of the week. Selects top 3 by clarity, transmissibility, and diversity of sectors. Writes the newsletter intro and field highlights.</div>
+        <div class="agent-trigger">Triggered · Friday 18:00</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN -->
+<div class="section-divider"><div class="divider-label">§ V — Access</div></div>
+<section id="join">
+  <div class="join-bg"></div>
+  <div class="join-inner">
+    <div class="section-eyebrow" style="margin-bottom:20px">Join the Grid</div>
+    <h2 class="join-title">You don't predict the future.<br>You direct it.</h2>
+    <p class="join-sub">The Grid is currently in private access. Founding members contribute the first Forsights and shape the community protocols.</p>
+    <div class="join-form">
+      <input type="email" class="join-input" placeholder="your@email.com">
+      <button class="join-submit">Request access</button>
+    </div>
+    <div class="join-note">Invitation only · Institut St-Laurent · Built on the Global Plan</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">The Grid</div>
+  <div class="footer-meta">Built on the Global Plan · Institut St-Laurent · 2026<br>askio1.com/grid</div>
+  <div class="footer-links">
+    <a href="https://askio1.com/isl" target="_blank">ISL</a>
+    <a href="https://github.com/yoanMaisonneuve/Forsight" target="_blank">Forsight</a>
+    <a href="https://github.com/yoanMaisonneuve/the-grid" target="_blank">GitHub</a>
+  </div>
+</footer>
+
+<!-- SECTOR DETAIL PANEL -->
+<div id="sector-panel">
+  <button class="sp-close" onclick="closePanel()">×</button>
+  <div class="sp-inner" id="sp-inner"></div>
+</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://esm.sh/three@0.150.0/build/three.module.js",
+    "three/addons/": "https://esm.sh/three@0.150.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+  import * as THREE from 'three';
+  import { OrbitControls }            from 'three/addons/controls/OrbitControls.js';
+  import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
+
+  // ── DATA ──────────────────────────────────────────────────────────────────
+  const FIELDS = [
+    { slug:'human-ai',     name:'Human-AI Collaboration',     phase:'disruption', detail:'Early Disruption',
+      bn:[{l:'critical',d:"Context quality — humans don't give AI the right context"},{l:'high',d:"Trust gap — people don't act on AI outputs"},{l:'high',d:"Interface bandwidth — voice/text too slow"}],
+      human:['Vision','Validation','Ethics','Creative direction'],ai:['Context management','Execution','Documentation','Pattern detection'],
+      metric:{lbl:'Knowledge workers using AI daily',now:'~15%',y30:'60%',y40:'90%'},forsights:2,pos:[0,2,0],conn:['companies','education','people']},
+    { slug:'robotics',     name:'Humanoid Robotics',           phase:'emergence',  detail:'Late Emergence',
+      bn:[{l:'critical',d:'Cost — $20K–$100K per unit in 2026'},{l:'high',d:'Dexterity — fine motor tasks unreliable'},{l:'high',d:"Safety certification — regulatory frameworks don't exist"}],
+      human:['Design','Oversight','Maintenance','Ethical deployment'],ai:['Physical execution','Repetitive labor','Dangerous environments','Precision tasks'],
+      metric:{lbl:'Cost of humanoid unit',now:'$50K',y30:'$10K',y40:'$2K'},forsights:0,pos:[2,1,-1],conn:['human-ai','energy','cities']},
+    { slug:'energy',       name:'Energy',                      phase:'disruption', detail:'Mid Disruption',
+      bn:[{l:'critical',d:"Grid infrastructure — old grids can't handle distributed renewables"},{l:'critical',d:'Political will — fossil fuel interests slow transition'},{l:'high',d:'Storage at scale — seasonal storage unsolved'}],
+      human:['Policy','Infrastructure investment','Community transition'],ai:['Grid optimization','Demand forecasting','Materials discovery','Fusion plasma control'],
+      metric:{lbl:'% global energy from renewables',now:'~15%',y30:'35%',y40:'70%'},forsights:0,pos:[-2,0,1],conn:['environment','robotics','cities']},
+    { slug:'education',    name:'Education',                   phase:'emergence',  detail:'Late Emergence',
+      bn:[{l:'critical',d:'Device access — 1.3B children without reliable internet'},{l:'high',d:"Teacher resistance — incentives don't reward AI adoption"},{l:'high',d:'Language coverage — AI tools still English-dominant'}],
+      human:['Mentorship','Values transmission','Critical thinking'],ai:['Tutoring','Content generation','Progress tracking','Translation'],
+      metric:{lbl:'% children with AI tutor access',now:'~5%',y30:'40%',y40:'85%'},forsights:0,pos:[1,-1,2],conn:['human-ai','people','governance']},
+    { slug:'health',       name:'Health',                      phase:'emergence',  detail:'Emergence → Disruption',
+      bn:[{l:'critical',d:'Regulatory speed — FDA/EMA approval built for pre-AI era'},{l:'high',d:'Data privacy — health data needed, privacy laws slow sharing'},{l:'high',d:'Healthcare inequality — best tools go to richest first'}],
+      human:['Surgery','Bedside care','Ethics','End-of-life decisions'],ai:['Diagnostics','Drug discovery','Patient monitoring','Mental health support'],
+      metric:{lbl:'% population with AI diagnostic access',now:'~10%',y30:'35%',y40:'75%'},forsights:0,pos:[-1,2,1],conn:['mental-health','people','governance']},
+    { slug:'economy',      name:'Economy',                     phase:'disruption', detail:'Early Disruption',
+      bn:[{l:'critical',d:'Political will — incumbent wealth resists redistribution'},{l:'high',d:'Job transformation speed — retraining systems too slow'},{l:'high',d:"Measurement gaps — can't manage what you can't measure"}],
+      human:['Policy','Redistribution decisions','Community economic design'],ai:['Economic modeling','Fraud detection','Financial inclusion tools'],
+      metric:{lbl:'Gini coefficient (global)',now:'0.67',y30:'0.63',y40:'0.55'},forsights:0,pos:[0,-2,0],conn:['companies','people','governance']},
+    { slug:'environment',  name:'Pollution & Environment',     phase:'disruption', detail:'Mid Disruption (lagging)',
+      bn:[{l:'critical',d:'Political coordination — no binding global enforcement'},{l:'critical',d:'Carbon removal cost — direct air capture $300–500/ton'},{l:'high',d:'Speed vs. scale — solutions exist but not scaling'}],
+      human:['Policy','Enforcement','Community adaptation'],ai:['Emissions monitoring','Climate modeling','Materials discovery','Early warning'],
+      metric:{lbl:'Annual CO₂ ppm increase',now:'+2.4/yr',y30:'+1.0/yr',y40:'−1.0/yr'},forsights:0,pos:[-2,-1,-1],conn:['energy','food','cities']},
+    { slug:'peace',        name:'Peace & Conflict',            phase:'disruption', detail:'Mid Disruption (destabilizing)',
+      bn:[{l:'critical',d:'Great power competition — US/China/Russia blocks coordination'},{l:'critical',d:'Autonomous weapons race — no treaty, every nation racing'},{l:'high',d:'Disinformation velocity — AI generates faster than humans verify'}],
+      human:['Negotiation','Governance design','Community reconciliation'],ai:['Conflict prediction','Disinformation detection','Treaty verification'],
+      metric:{lbl:'Active conflicts globally',now:'30+',y30:'20',y40:'10'},forsights:0,pos:[2,-1,1],conn:['governance','people','economy']},
+    { slug:'cities',       name:'Cities',                      phase:'emergence',  detail:'Mid Emergence',
+      bn:[{l:'critical',d:'Housing supply — zoning laws block density'},{l:'high',d:'Infrastructure age — most built 50–100 years ago'},{l:'high',d:"Data silos — departments don't share, AI can't optimize"}],
+      human:['Community design','Zoning decisions','Social cohesion'],ai:['Traffic optimization','Energy grid management','Predictive maintenance'],
+      metric:{lbl:'% cities with AI urban management',now:'~3%',y30:'20%',y40:'60%'},forsights:0,pos:[1,1,-2],conn:['energy','robotics','governance']},
+    { slug:'governance',   name:'Governance',                  phase:'emergence',  detail:'Early Emergence',
+      bn:[{l:'critical',d:'Regulatory lag — laws take years, tech moves in weeks'},{l:'critical',d:'Institutional inertia — bureaucracies resist change'},{l:'high',d:'Lobbying power — incumbent industries write the rules'}],
+      human:['Legislation','Justice','Representation','Accountability'],ai:['Policy simulation','Budget optimization','Service delivery','Fraud detection'],
+      metric:{lbl:'Countries with AI governance framework',now:'~15',y30:'60',y40:'120'},forsights:0,pos:[-1,-1,2],conn:['economy','education','peace']},
+    { slug:'companies',    name:'Companies & Organizations',   phase:'disruption', detail:'Early Disruption',
+      bn:[{l:'critical',d:'SME adoption gap — 90% of companies are SMEs, most not using AI'},{l:'high',d:'Change management — employees resist AI adoption'},{l:'high',d:'AI governance void — no standards for responsible AI use'}],
+      human:['Strategy','Culture','Client relationships','Ethics'],ai:['Operations','Customer service','Data analysis','Forecasting'],
+      metric:{lbl:'% SMEs using AI regularly',now:'~10%',y30:'40%',y40:'80%'},forsights:0,pos:[2,0,2],conn:['human-ai','economy','people']},
+    { slug:'people',       name:'People & Individuals',        phase:'emergence',  detail:'Early Emergence',
+      bn:[{l:'critical',d:'Mental health crisis — loneliness epidemic, AI accelerates it'},{l:'critical',d:'AI literacy gap — no framework for using AI effectively'},{l:'high',d:'Access inequality — augmentation available to rich first'}],
+      human:['Relationships','Creativity','Values','Community','Meaning-making'],ai:['Personal assistant','Health monitoring','Learning support','Career navigation'],
+      metric:{lbl:'% population with personal AI system',now:'~8%',y30:'35%',y40:'75%'},forsights:0,pos:[0,0,-2],conn:['mental-health','education','economy']},
+    { slug:'food',         name:'Food & Agriculture',          phase:'emergence',  detail:'Mid Emergence',
+      bn:[{l:'critical',d:'Climate impact — unpredictable weather threatening food security'},{l:'critical',d:'Water scarcity — agriculture uses 70% of freshwater'},{l:'high',d:'Lab-grown protein — not yet price-competitive at scale'}],
+      human:['Farming decisions','Food culture','Community food systems'],ai:['Crop optimization','Pest prediction','Supply chain management','Soil health'],
+      metric:{lbl:'% farmland using precision agriculture',now:'~5%',y30:'25%',y40:'60%'},forsights:0,pos:[-2,1,-2],conn:['environment','energy','health']},
+    { slug:'mental-health',name:'Mental Health',               phase:'disruption', detail:'Mid Disruption',
+      bn:[{l:'critical',d:'Therapist shortage — cannot train enough humans fast enough'},{l:'high',d:'Stigma — still stigmatized in most cultures'},{l:'high',d:'Platform incentives — social media optimized for engagement not wellbeing'}],
+      human:['Deep therapy','Community building','Relationships','Grief','Meaning'],ai:['Triage','CBT delivery','Crisis detection','Peer matching','Therapist support'],
+      metric:{lbl:'Global loneliness index',now:'Worsening',y30:'Stable',y40:'Improving'},forsights:0,pos:[1,-2,-1],conn:['people','health','governance']},
+  ];
+
+  const FMAP = Object.fromEntries(FIELDS.map(f=>[f.slug,f]));
+  const PC   = { disruption:0x009ADE, emergence:0x2d6a88, integration:0x00d4aa };
+  const SC   = 3.0;
+
+  // ── BUILD SECTORS GRID ─────────────────────────────────────────────────────
+  const sg = document.getElementById('sectors-grid');
+  FIELDS.forEach((f, i) => {
+    const card = document.createElement('div');
+    card.className = 'sector-card';
+    card.innerHTML = `
+      <div class="sc-num">§ ${String(i+1).padStart(2,'0')} / 14</div>
+      <div class="sc-name">${f.name}</div>
+      <div class="sc-badge ${f.phase}"><div class="sc-pip"></div>${f.detail}</div>
+      <div class="sc-bn">${f.bn[0].d}</div>
+    `;
+    card.onclick = () => openPanel(f, i);
+    sg.appendChild(card);
+  });
+
+  // ── THREE.JS ──────────────────────────────────────────────────────────────
+  const canvas   = document.getElementById('hero-canvas');
+  const hero     = document.getElementById('hero');
+  const W = hero.offsetWidth, H = hero.offsetHeight;
+
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setSize(W, H);
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.setClearColor(0x000810, 1);
+
+  const lRend = new CSS2DRenderer();
+  lRend.setSize(W, H);
+  lRend.domElement.id = 'label-layer';
+  Object.assign(lRend.domElement.style, { position:'absolute', top:'0', left:'0', pointerEvents:'none' });
+  const ll = document.getElementById('label-layer');
+  ll.parentNode.replaceChild(lRend.domElement, ll);
+
+  const scene  = new THREE.Scene();
+  const cam    = new THREE.PerspectiveCamera(60, W/H, 0.1, 200);
+  cam.position.set(0, 0, 17);
+
+  const ctrl = new OrbitControls(cam, renderer.domElement);
+  ctrl.enableDamping = true; ctrl.dampingFactor = 0.07;
+  ctrl.minDistance = 8; ctrl.maxDistance = 40;
+  ctrl.autoRotate = true; ctrl.autoRotateSpeed = 0.25;
+
+  // Stars
+  const sGeo = new THREE.BufferGeometry();
+  const N = 1200; const sp = new Float32Array(N*3);
+  for(let i=0;i<N*3;i++) sp[i]=(Math.random()-0.5)*160;
+  sGeo.setAttribute('position',new THREE.BufferAttribute(sp,3));
+  scene.add(new THREE.Points(sGeo, new THREE.PointsMaterial({color:0x3a7a99,size:0.07,transparent:true,opacity:0.5})));
+
+  scene.add(new THREE.AmbientLight(0x0a1c2e, 3));
+  const ptL = new THREE.PointLight(0x009ADE, 3, 30);
+  ptL.position.set(0,0,0); scene.add(ptL);
+
+  // Nodes
+  const meshes=[], glows=[], lblDivs=[], connLines=[];
+
+  FIELDS.forEach((f,i) => {
+    const col = PC[f.phase];
+    const pos = new THREE.Vector3(...f.pos.map(v=>v*SC));
+    const isDis = f.phase==='disruption';
+
+    const m = new THREE.Mesh(
+      new THREE.SphereGeometry(0.16, 18, 18),
+      new THREE.MeshStandardMaterial({color:col,emissive:col,emissiveIntensity:isDis?1.8:0.5,roughness:0.1,metalness:0.6})
+    );
+    m.position.copy(pos); m.userData={idx:i,slug:f.slug};
+    scene.add(m); meshes.push(m);
+
+    const g = new THREE.Mesh(
+      new THREE.SphereGeometry(0.4, 14, 14),
+      new THREE.MeshBasicMaterial({color:col,transparent:true,opacity:isDis?0.07:0.03,depthWrite:false})
+    );
+    g.position.copy(pos); scene.add(g); glows.push(g);
+
+    const d = document.createElement('div');
+    d.className='node-label';
+    d.textContent=f.name.toUpperCase();
+    const lo = new CSS2DObject(d);
+    lo.position.set(0,0.46,0); m.add(lo); lblDivs.push(d);
+  });
+
+  // Connections
+  const drawn = new Set();
+  FIELDS.forEach(f => {
+    f.conn.forEach(cs => {
+      const key=[f.slug,cs].sort().join('|');
+      if(drawn.has(key)||!FMAP[cs]) return;
+      drawn.add(key);
+      const pA=new THREE.Vector3(...f.pos.map(v=>v*SC));
+      const pB=new THREE.Vector3(...FMAP[cs].pos.map(v=>v*SC));
+      const mat=new THREE.LineBasicMaterial({color:0x009ADE,transparent:true,opacity:0.1});
+      const ln=new THREE.Line(new THREE.BufferGeometry().setFromPoints([pA,pB]),mat);
+      scene.add(ln);
+      connLines.push({ln,mat,slugs:[f.slug,cs]});
+    });
+  });
+
+  // Interaction
+  const ray=new THREE.Raycaster(), mouse=new THREE.Vector2();
+  const tt=document.getElementById('tooltip'), ttn=document.getElementById('tt-n'), ttp=document.getElementById('tt-p');
+  let hov=-1;
+
+  function hl(slugFocus) {
+    connLines.forEach(({mat,slugs})=>{mat.opacity=slugFocus&&slugs.includes(slugFocus)?0.5:0.1;});
+  }
+
+  hero.addEventListener('mousemove', e => {
+    const rect=hero.getBoundingClientRect();
+    mouse.x=((e.clientX-rect.left)/W)*2-1;
+    mouse.y=-((e.clientY-rect.top)/H)*2+1;
+    ray.setFromCamera(mouse,cam);
+    const hits=ray.intersectObjects(meshes);
+    if(hits.length){
+      const idx=hits[0].object.userData.idx;
+      if(idx!==hov){ if(hov>=0)lblDivs[hov].classList.remove('hl'); hov=idx; lblDivs[idx].classList.add('hl'); hl(FIELDS[idx].slug); }
+      ttn.textContent=FIELDS[idx].name; ttp.textContent=FIELDS[idx].detail;
+      tt.style.left=(e.clientX+15)+'px'; tt.style.top=(e.clientY-10)+'px';
+      tt.classList.add('show'); hero.style.cursor='pointer';
+    } else {
+      if(hov>=0){lblDivs[hov].classList.remove('hl');hov=-1;hl(null);}
+      tt.classList.remove('show'); hero.style.cursor='';
+    }
+  });
+
+  hero.addEventListener('click', e => {
+    ray.setFromCamera(mouse,cam);
+    const hits=ray.intersectObjects(meshes);
+    if(hits.length){
+      const idx=hits[0].object.userData.idx;
+      openPanel(FIELDS[idx],idx);
+    }
+  });
+
+  // Animation
+  const clk=new THREE.Clock(); const sv=new THREE.Vector3();
+  function animate() {
+    requestAnimationFrame(animate);
+    const t=clk.getElapsedTime();
+    FIELDS.forEach((f,i)=>{
+      const isDis=f.phase==='disruption';
+      const speed=isDis?1.9:0.7,amp=isDis?0.35:0.12,base=isDis?1.8:0.5;
+      const pulse=base+Math.sin(t*speed+i*1.4)*amp;
+      const isH=i===hov;
+      meshes[i].material.emissiveIntensity=isH?4.0:pulse;
+      const ts=isH?1.6:1.0; sv.setScalar(ts);
+      meshes[i].scale.lerp(sv,0.12);
+      sv.setScalar(ts*1.3); glows[i].scale.lerp(sv,0.1);
+      glows[i].material.opacity=isH?0.28:(isDis?0.07:0.03);
+    });
+    ctrl.update();
+    renderer.render(scene,cam);
+    lRend.render(scene,cam);
+  }
+  animate();
+
+  // Resize
+  window.addEventListener('resize',()=>{
+    const w=hero.offsetWidth,h=hero.offsetHeight;
+    cam.aspect=w/h; cam.updateProjectionMatrix();
+    renderer.setSize(w,h); lRend.setSize(w,h);
+  });
+
+  // Progress bar
+  window.addEventListener('scroll',()=>{
+    const p=window.scrollY/(document.documentElement.scrollHeight-window.innerHeight);
+    document.getElementById('progress-rail').style.transform=`scaleX(${p})`;
+  });
+
+  // ── SECTOR PANEL ───────────────────────────────────────────────────────────
+  window.openPanel = function(f, idx) {
+    document.getElementById('sp-inner').innerHTML = `
+      <div class="sp-eyebrow">▸ SECTEUR · ${String(idx+1).padStart(2,'0')} / 14</div>
+      <h2 class="sp-title">${f.name}</h2>
+      <div class="sp-badge ${f.phase}"><div class="sp-badge-dot"></div>${f.detail}</div>
+
+      <div class="sp-sec">// Bottlenecks</div>
+      <div class="bn-grid">
+        ${f.bn.map(b=>`<div class="bn-row"><div class="bn-lv ${b.l}">${b.l}</div><div class="bn-text">${b.d}</div></div>`).join('')}
+      </div>
+
+      <div class="sp-divider"></div>
+
+      <div class="sp-sec">// Division du travail</div>
+      <div class="tasks-row">
+        <div>
+          <div class="tasks-col-label">Humain</div>
+          ${f.human.map(t=>`<div class="task-line">${t}</div>`).join('')}
+        </div>
+        <div>
+          <div class="tasks-col-label">IA</div>
+          ${f.ai.map(t=>`<div class="task-line">${t}</div>`).join('')}
+        </div>
+      </div>
+
+      <div class="sp-divider"></div>
+
+      <div class="sp-sec">// Métrique primaire</div>
+      <div class="metric-box">
+        <div class="metric-box-label">${f.metric.lbl}</div>
+        <div class="metric-row-nums">
+          <div class="metric-col-n"><div class="metric-big">${f.metric.now}</div><div class="metric-yr">Maintenant</div></div>
+          <div class="metric-col-n"><div class="metric-big">${f.metric.y30}</div><div class="metric-yr">2030</div></div>
+          <div class="metric-col-n"><div class="metric-big">${f.metric.y40}</div><div class="metric-yr">2040</div></div>
+        </div>
+      </div>
+
+      <div class="sp-divider"></div>
+
+      <div class="sp-sec">// Forsights dans ce secteur</div>
+      <div style="display:flex;align-items:center;gap:16px;padding:12px 0">
+        <div style="font-family:'Space Grotesk',sans-serif;font-size:48px;font-weight:700;color:var(--vivid)">${f.forsights}</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:0.12em;text-transform:uppercase">Forsights<br>publiées</div>
+      </div>
+
+      <button class="sp-contribute" onclick="window.location='#join'">+ Contribuer une observation dans ce secteur</button>
+    `;
+    document.getElementById('sector-panel').classList.add('open');
+    document.body.style.overflow='hidden';
+  };
+
+  window.closePanel = function() {
+    document.getElementById('sector-panel').classList.remove('open');
+    document.body.style.overflow='';
+  };
+
+  document.getElementById('sector-panel').addEventListener('keydown', e=>{
+    if(e.key==='Escape') closePanel();
+  });
+</script>
+</body>
+</html>

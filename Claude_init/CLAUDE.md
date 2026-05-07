@@ -154,6 +154,20 @@ the-grid/
 
 ---
 
+## DÉPLOIEMENT — askio1.com
+
+**Site local (source) :** `C:\bpmotivv4\project\apps\web\app\`
+**Fichier principal :** `index.html`
+**Page cachée Grid :** `C:\bpmotivv4\project\apps\web\app\grid.html`
+**Activation :** taper "grid" sur le site askio1.com → redirige vers /grid
+
+**Pour déployer une mise à jour grid.html :**
+1. Copier `openClaude/the-grid/frontend/grid.html` → `C:\bpmotivv4\project\apps\web\app\grid.html`
+2. Push le repo askio1 (bpmotivv4) → le site se met à jour
+3. Vérifier : askio1.com/grid
+
+---
+
 ## SHORTHAND
 
 ```
